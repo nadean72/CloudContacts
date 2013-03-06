@@ -78,6 +78,12 @@ public class ContactList extends Activity {
         populateCategorySpinner();
     }
     
+    protected void onStop(){
+    	//stuff to write
+        new FileHelper().putFile(this, "test.txt", "Wheeeeeeee".getBytes());
+    	super.onStop();
+    }
+    
     protected void populateCategorySpinner(){
     	ArrayList<String> catArr = new ArrayList<String>();
     	catArr.add("All");
