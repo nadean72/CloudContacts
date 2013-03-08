@@ -11,18 +11,22 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-public class HTTPPostTask extends AsyncTask<Object[], Integer, Boolean> {
+public class HTTPPostTask extends AsyncTask<String, Integer, Boolean> {
 
 	@Override
-	protected Boolean doInBackground(Object[]... urlAndData){
-		String url = urlAndData[0].toString();
-		String key = urlAndData[1].toString();
-		Object boxedData = urlAndData[2];
-		byte[] data = (byte[])boxedData;
+	protected Boolean doInBackground(String... urlAndData){
+		String url = urlAndData[0];
+		String key = urlAndData[1];
+		String filePath = urlAndData[2];
+		
+		
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(url);
-		httpPost.setEntity(new ByteArrayEntity(data));
+		
+		byte[] filebytes = FileHelper.readFile(filePath);
+		
+		httpPost.setEntity(new ByteArrayEntity(filebytes));
 		try {
 			HttpResponse response = httpClient.execute(httpPost);
 		} catch (ClientProtocolException e) {
