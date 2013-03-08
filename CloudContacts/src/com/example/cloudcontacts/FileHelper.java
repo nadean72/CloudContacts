@@ -1,11 +1,10 @@
 package com.example.cloudcontacts;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.LinkedList;
 
 import android.content.Context;
 
@@ -26,21 +25,37 @@ public class FileHelper {
 	}
 
 	public static byte[] readFile(String fileName){
-		LinkedList<Integer> intsRead = new LinkedList<Integer>();
+		int bufferSize = 1024;
+		byte[] buf = new byte[bufferSize];
+		
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(fileName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		
 		try{
-			FileInputStream fis = new FileInputStream(fileName);
-			int read = 0;
-			while((read = fis.read()) != -1){
-				intsRead.add(read);
-			}
-		}catch(Exception e){
-
+	    int bytesRead = input.read(buf);
+	    
+	    while (bytesRead != -1) {
+	      output.write(buf, 0, bytesRead);
+	      bytesRead = input.read(buf);
+	    }
+	    output.flush();
+		}catch(IOException e){
+			
 		}
-
-		for(int i : intsRead){
-			//TODO: to bytes
+		
+		try {
+			input.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		return null;
+		
+		return output.toByteArray();
 	}
 }

@@ -68,8 +68,8 @@ public class ContactList extends Activity {
         		
         	}
         });
-
         
+        byte[] x = FileHelper.readFile("/data/data/com.example.cloudcontacts/databases/MyContacts");
     }
     
     protected void onResume(){
