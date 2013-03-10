@@ -30,6 +30,10 @@
             android:name="com.example.cloudcontacts.EditCategories"
             android:label="@string/title_activity_edit_categories" >
         </activity>
+        <activity
+            android:name="com.example.cloudcontacts.RegisterUser"
+            android:label="@string/title_activity_register_user" >
+        </activity>
     </application>
 
 </manifest>

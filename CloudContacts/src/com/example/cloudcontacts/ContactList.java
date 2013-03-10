@@ -2,15 +2,16 @@ package com.example.cloudcontacts;
 
 import java.util.ArrayList;
 
-import com.example.cloudcontacts.R;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContactList extends Activity {
 
@@ -135,8 +137,37 @@ public class ContactList extends Activity {
     		intent.putExtra("ID", id);
     		startActivity(intent);
     		return true;
-    	}else
+    	}else 
+    		if(item.getItemId() == R.id.menu_login_cloud){
+    		AlertDialog.Builder  input = new AlertDialog.Builder(this);
+    		LayoutInflater inflater = this.getLayoutInflater();
+    		input.setView(inflater.inflate(R.layout.login_cloud,  null));
+    		input.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Toast.makeText(ContactList.this, "Login", Toast.LENGTH_SHORT).show();
+					dialog.cancel();
+				}
+			});//end of dialogInterface.OnclickListener for positiveButton
+    		
+    		input.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+    			
+    		});// end of dialoginterface.OnClickListener for negative Button
+    		
+    		input.show();
     		return super.onOptionsItemSelected(item);
+    	} else
+    		if(item.getItemId() == R.id.menu_register_cloud){
+    			Intent intent = new Intent(getApplicationContext(), RegisterUser.class);
+    			startActivity(intent);
+    		}
+    	return super.onOptionsItemSelected(item);
+    	//testing
     }
 
     
