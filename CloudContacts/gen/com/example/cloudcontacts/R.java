@@ -38,7 +38,6 @@ public final class R {
         public static final int editCat3=0x7f09000d;
         public static final int editCat4=0x7f09000e;
         public static final int editCat5=0x7f09000f;
-        public static final int editText3=0x7f090016;
         public static final int loginName=0x7f090014;
         public static final int menu_add_contact=0x7f090018;
         public static final int menu_delete_contact=0x7f09001b;
@@ -49,6 +48,7 @@ public final class R {
         public static final int okButton=0x7f090010;
         public static final int password=0x7f090017;
         public static final int passwordOne=0x7f090015;
+        public static final int passwordTwo=0x7f090016;
         public static final int primNumber=0x7f090005;
         public static final int registerButton=0x7f090013;
         public static final int registrationTitle=0x7f090012;

@@ -24,8 +24,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper{
 		String createCategories = "CREATE TABLE Categories" +
 				"(_id INTEGER PRIMARY KEY NOT NULL," +
 				"name TEXT);";
+		String createUsers= "CREATE TABLE User "+
+				"(user TEXT PRIMARY KEY NOT NULL, "+
+				"pass TEXT NOT NULL);";
+		
 		db.execSQL(createCategories);
 		db.execSQL(createContacts);
+		db.execSQL(createUsers);
 	}
 	
 	@Override

@@ -1,9 +1,13 @@
 package com.example.cloudcontacts;
 
+import java.io.BufferedReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -139,15 +144,35 @@ public class ContactList extends Activity {
     		return true;
     	}else 
     		if(item.getItemId() == R.id.menu_login_cloud){
-    		AlertDialog.Builder  input = new AlertDialog.Builder(this);
+    		final AlertDialog.Builder  input = new AlertDialog.Builder(this);
     		LayoutInflater inflater = this.getLayoutInflater();
-    		input.setView(inflater.inflate(R.layout.login_cloud,  null));
+    		final View view = (inflater.inflate(R.layout.login_cloud,  null));
+    		input.setView(view);
     		input.setPositiveButton("Login", new DialogInterface.OnClickListener() {
-				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Toast.makeText(ContactList.this, "Login", Toast.LENGTH_SHORT).show();
-					dialog.cancel();
+					EditText loginName = (EditText) view.findViewById(R.id.loginName);
+					EditText password = (EditText) view.findViewById(R.id.password);
+					String login = loginName.getText().toString();
+					String pass = password.getText().toString();
+					
+					
+					
+					URLHelper helper = new URLHelper();
+			    	String dir = "http://softeng.cs.uwosh.edu/students/nadean72/login.php?user="+login+"&pass="+pass;
+					if(helper.retrieveTextData(dir))
+					{
+						DatabaseConnector db = new DatabaseConnector(ContactList.this);
+					    db.insertUser(login, pass);
+					    Toast.makeText(ContactList.this, "Login Successful", Toast.LENGTH_SHORT).show();
+						dialog.cancel();
+					}else
+					{
+						Toast.makeText(ContactList.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
+					    loginName.setText("");
+					    password.setText("");
+					}
+					
 				}
 			});//end of dialogInterface.OnclickListener for positiveButton
     		
@@ -167,7 +192,32 @@ public class ContactList extends Activity {
     			startActivity(intent);
     		}
     	return super.onOptionsItemSelected(item);
-    	//testing
+    }
+   
+    
+    /*
+    public boolean login(String login, String pass)
+    {
+    	boolean success = false;
+    	URLHelper helper = new URLHelper();
+    	String dir = "http://softeng.cs.uwosh.edu/students/nadean72/login.php?user="+login+"&pass="+pass;
+    	if(helper.retrieveTextData(dir)){
+    		Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+    		success=true;
+    		//upload the data
+    	}
+    	else
+    		Toast.makeText(this, "Login or password is incorrect", Toast.LENGTH_SHORT).show();
+    	
+    	return success;
+    }
+    */
+    
+    public void clear(){
+    	EditText login = (EditText) findViewById(R.id.loginName);
+    	EditText pass = (EditText) findViewById(R.id.password);
+    	login.setText("");
+    	pass.setText("");
     }
 
     

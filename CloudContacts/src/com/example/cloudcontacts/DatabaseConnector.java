@@ -53,6 +53,21 @@ public class DatabaseConnector {
 		close();
 	}
 	
+	//insert Cloud User
+	public void insertUser(String userName, String password)
+	{
+		
+		ContentValues users = new ContentValues();
+		users.put("user", userName);
+		users.put("pass", password);
+		
+		
+		open();
+		database.delete("User", null, null);
+		database.insert("User", null, users);
+		close();
+	}
+	
 	//delete contact
 	public void deleteContact(int id){
 		open();
@@ -75,6 +90,7 @@ public class DatabaseConnector {
 		database.update("Contacts", editRow, "_id=" + id, null);
 		close();
 	}
+	
 
 	//modify category
 	public void updateCategory(int id, String name){

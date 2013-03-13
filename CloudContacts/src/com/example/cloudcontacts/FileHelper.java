@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.example.cloudcontacts;
 
 import java.io.ByteArrayOutputStream;
@@ -60,7 +60,9 @@ public class FileHelper {
 		return output.toByteArray();
 	}
 }
-=======
+
+
+/*
 package com.example.cloudcontacts;
 
 import java.io.FileNotFoundException;
@@ -68,6 +70,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.content.Context;
+
+
 
 public class FileHelper {
 	//These files are stored in /data/data/com.example.mycontacts/files/
@@ -85,4 +89,5 @@ public class FileHelper {
 		}
 	}
 }
->>>>>>> login and register
+
+*/
