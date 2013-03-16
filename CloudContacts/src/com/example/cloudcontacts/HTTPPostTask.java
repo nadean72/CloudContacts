@@ -38,7 +38,7 @@ public class HTTPPostTask extends AsyncTask<String, Integer, Boolean> {
 		String fileString = Base64.encodeToString(filebytes, Base64.DEFAULT);
 		
 		List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
-		nameValuePairs.add(new BasicNameValuePair("file",fileString));
+		nameValuePairs.add(new BasicNameValuePair("data",fileString));
 		
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

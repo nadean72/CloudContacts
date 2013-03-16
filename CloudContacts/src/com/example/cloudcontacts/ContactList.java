@@ -77,7 +77,7 @@ public class ContactList extends Activity {
         });
         
 
-        String url = "http://softeng.cs.uwosh.edu/students/willic82/test.php";
+        String url = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=test1";
         String key = "what";
         String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
         new HTTPPostTask().execute(url, key, file);
