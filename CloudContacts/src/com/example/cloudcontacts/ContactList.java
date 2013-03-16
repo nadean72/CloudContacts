@@ -142,7 +142,7 @@ public class ContactList extends Activity {
     	if (item.getItemId() == R.id.menu_add_contact){
     		Intent intent = new Intent(getApplicationContext(), ContactView.class);
     		DatabaseConnector database = new DatabaseConnector(this);
-    		long id = database.insertContact("New Contact", "", "", "", "", "", 0);
+    		long id = database.insertContact("", "", "", "", "", "", 0);
     		intent.putExtra("ID", id);
     		startActivity(intent);
     		return true;
@@ -198,6 +198,7 @@ public class ContactList extends Activity {
     	return super.onOptionsItemSelected(item);
     }
    
+    
     
     /*
     public boolean login(String login, String pass)

@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContactView extends Activity {
 
@@ -71,6 +72,18 @@ public class ContactView extends Activity {
         databaseConnector.close();
 		
 	}
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+        TextView name = (TextView) findViewById(R.id.contactName);
+        if(name.getText().toString().equals("")){
+        	DatabaseConnector database = new DatabaseConnector(ContactView.this);
+        	database.open();
+    		database.deleteContact((int)contactId);
+    		database.close();
+        }
+	}
 
     protected void populateCategorySpinner(){
     	ArrayList<String> catArr = new ArrayList<String>();
@@ -106,8 +119,10 @@ public class ContactView extends Activity {
         	.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
         	    public void onClick(DialogInterface dialog, int which) {	
             		DatabaseConnector database = new DatabaseConnector(ContactView.this);
+            		database.open();
             		database.deleteContact((int)contactId);
             		database.close();
+				    Toast.makeText(ContactView.this, "Contact Deleted", Toast.LENGTH_SHORT).show();
             		ContactView.this.finish();
         	    }
         	})
@@ -115,6 +130,7 @@ public class ContactView extends Activity {
         	.show();
     		return true;
     	}else if (item.getItemId() == R.id.menu_save_contact){
+    		
     		DatabaseConnector database = new DatabaseConnector(this);
             TextView name = (TextView) findViewById(R.id.contactName);
             TextView number = (TextView) findViewById(R.id.primNumber);
@@ -123,18 +139,21 @@ public class ContactView extends Activity {
             TextView email = (TextView) findViewById(R.id.contactEmail);
             TextView comments = (TextView) findViewById(R.id.contactComments);
             Spinner category = (Spinner) findViewById(R.id.contactCat);
-            
-            database.updateContact(
-            		(int)contactId, 
-            		name.getText().toString(), 
-            		addr.getText().toString(), 
-            		number.getText().toString(), 
-            		altNumber.getText().toString(), 
-            		email.getText().toString(), 
-            		comments.getText().toString(), 
-            		category.getSelectedItemPosition());
-            database.close();
-            
+	        if(!name.getText().toString().equals("")){
+	            database.updateContact(
+	            		(int)contactId, 
+	            		name.getText().toString(), 
+	            		addr.getText().toString(), 
+	            		number.getText().toString(), 
+	            		altNumber.getText().toString(), 
+	            		email.getText().toString(), 
+	            		comments.getText().toString(), 
+	            		category.getSelectedItemPosition());
+	            database.close();
+			    Toast.makeText(ContactView.this, "Contact Saved", Toast.LENGTH_SHORT).show();
+	        }else{
+			    Toast.makeText(ContactView.this, "Contact must be named", Toast.LENGTH_SHORT).show();
+	        }
     		return true;
     	}else
     		return super.onOptionsItemSelected(item);

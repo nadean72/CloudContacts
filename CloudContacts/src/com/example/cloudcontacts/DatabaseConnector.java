@@ -43,6 +43,8 @@ public class DatabaseConnector {
 		close();
 		return id;
 	}
+	
+	
 	public void insertCategory(int id, String name){
 		ContentValues newRow = new ContentValues();
 		newRow.put("_id", id);
@@ -66,6 +68,11 @@ public class DatabaseConnector {
 		database.delete("User", null, null);
 		database.insert("User", null, users);
 		close();
+	}
+	
+	//
+	public Cursor getUser(){
+		return database.query("User", new String[] {"user", "pass"}, null, null, null, null, null);
 	}
 	
 	//delete contact

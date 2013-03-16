@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditCategories extends Activity {
 
@@ -60,7 +61,8 @@ public class EditCategories extends Activity {
 		for(int i = 0; i < categoryArr.length; i++){
 			db.updateCategory(i, categoryArr[i].getText().toString());
 		}
-		
+
+	    Toast.makeText(EditCategories.this, "Categories Saved", Toast.LENGTH_SHORT).show();
 		db.close();
 		
 	}
