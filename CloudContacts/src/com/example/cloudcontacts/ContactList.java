@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -88,6 +89,22 @@ public class ContactList extends Activity {
     	super.onResume();
         new PopulateContactListTask().execute((Object[]) null);
         populateCategorySpinner();
+        
+        LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
+        DatabaseConnector db = new DatabaseConnector(this);
+        db.open();
+        Cursor user = db.getUser();
+        if(user.getCount() > 0){
+        	while(layout.getChildCount() > 3)
+        		layout.removeViewAt(0);
+        	user.moveToFirst();
+        	TextView label = new TextView(this);
+        	String userName = user.getString(user.getColumnIndex("user"));
+        	label.setText("Logged in as: " + userName);
+        	layout.addView(label, 0);
+        }
+        db.close();
+        
     }
     
     protected void onStop(){
@@ -170,6 +187,20 @@ public class ContactList extends Activity {
 					    db.insertUser(login, pass);
 					    Toast.makeText(ContactList.this, "Login Successful", Toast.LENGTH_SHORT).show();
 						dialog.cancel();
+				        
+				        LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
+				        db.open();
+				        Cursor user = db.getUser();
+				        if(user.getCount() > 0){
+				        	while(layout.getChildCount() > 3)
+				        		layout.removeViewAt(0);
+				        	user.moveToFirst();
+				        	TextView label = new TextView(ContactList.this);
+				        	String userName = user.getString(user.getColumnIndex("user"));
+				        	label.setText("Logged in as: " + userName);
+				        	layout.addView(label, 0);
+				        }
+				        db.close();
 					}else
 					{
 						Toast.makeText(ContactList.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();

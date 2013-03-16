@@ -75,7 +75,7 @@ public class ContactView extends Activity {
 	
 	@Override
 	protected void onPause(){
-		super.onPause();
+		super.onPause();	
         TextView name = (TextView) findViewById(R.id.contactName);
         if(name.getText().toString().equals("")){
         	DatabaseConnector database = new DatabaseConnector(ContactView.this);
