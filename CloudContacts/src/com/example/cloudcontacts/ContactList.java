@@ -77,14 +77,9 @@ public class ContactList extends Activity {
         });
         
 
-    	//stuff to write
-    	String s = FileHelper.stringOfLength(2500);
-        new FileHelper().putFile(this, "test.txt", s.getBytes());
-        
-        byte[] x = FileHelper.readFile("/data/data/com.example.cloudcontacts/databases/MyContacts");
         String url = "http://softeng.cs.uwosh.edu/students/willic82/test.php";
         String key = "what";
-        String file = "/data/data/com.example.cloudcontacts/files/test.txt";
+        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
         new HTTPPostTask().execute(url, key, file);
 
     }
@@ -97,7 +92,6 @@ public class ContactList extends Activity {
     
     protected void onStop(){
     	//stuff to write
-        new FileHelper().putFile(this, "test.txt", "Wheeeeeeee".getBytes());
     	super.onStop();
     }
     
