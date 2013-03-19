@@ -70,9 +70,27 @@ public class DatabaseConnector {
 		close();
 	}
 	
+	public void insertTheme(int theme)
+	{
+		
+		ContentValues themes = new ContentValues();
+		themes.put("themeId", theme);
+	
+		
+		open();
+		database.delete("Theme", null, null);
+		database.insert("Theme", null, themes);
+		close();
+	}
+	
 	//
 	public Cursor getUser(){
 		return database.query("User", new String[] {"user", "pass"}, null, null, null, null, null);
+	}
+	
+	public Cursor getTheme(){
+		return database.query("Theme", new String[]{"themeId"}, null, null, null, null, null);
+		
 	}
 	
 	//delete contact

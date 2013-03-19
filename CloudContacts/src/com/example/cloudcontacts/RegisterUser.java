@@ -13,6 +13,8 @@ public class RegisterUser extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		int theme = getIntent().getIntExtra("theme", 0);
+        setTheme(theme);
 		setContentView(R.layout.activity_register_user);
 	}
 

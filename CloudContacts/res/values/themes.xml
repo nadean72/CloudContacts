@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      
+      <!-- Use the Android Dialog theme as the base for a new compound theme DialogNoTitle -->
+      <!-- Apply using attribute android:theme="@style/DialogNoTitle in manifest file for -->
+      <!--  activity, or setTheme(R.style.DialogNoTitle) before setContentView() in code. -->
+      
+      <style name="DialogNoTitle" parent="@android:style/Theme.Dialog">
+         <!-- hide the Window Title -->
+         <item name="android:windowNoTitle">true</item>
+         <item name="android:textColor">#00FF00</item>
+         <item name="android:background">#FF0000</item>
+         
+      </style>
+      
+      
+      <style name="HoloLightNoTitle" parent="@android:style/Theme.Holo.Light">
+         <item name="android:windowNoTitle">true</item>
+         <item name="android:textColor">#00FF00</item>
+         <item name="android:background">#FF0000</item>
+         <item name="android:attr/editTextColor">#00FF00</item>
+      </style>
+      
+      <style name="HoloNoTitle" parent="@android:style/Theme.Holo">
+         <item name="android:windowNoTitle">true</item>
+      </style>
+      
+   </resources>

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -33,6 +34,7 @@ public class ContactList extends Activity {
 
 	private ArrayList<String> contactNames;
 	private ArrayList<Long> contactIds;
+	private int theme;
 	
     private CharSequence searchText = "";
     
@@ -57,6 +59,23 @@ public class ContactList extends Activity {
         databaseConnector.close();
         
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        DatabaseConnector db = new DatabaseConnector(this);
+        db.open();
+        Cursor newTheme = db.getTheme();
+        if(newTheme.getCount() > 0){
+        	newTheme.moveToFirst();
+        	int theTheme = newTheme.getInt(newTheme.getColumnIndex("themeId"));
+        	//int theTheme = Integer.parseInt(theme);
+        	theme = theTheme;
+            super.setTheme(theTheme);
+        }
+        else {
+        	theme = R.style.AppBaseTheme;
+            super.setTheme(R.style.AppBaseTheme);
+        }
+        db.close();
+        
         setContentView(R.layout.activity_contact_list);
         
 
@@ -140,6 +159,7 @@ public class ContactList extends Activity {
         		if(parent.getSelectedItemPosition() == 6){
         			parent.setSelection(0);
         			Intent intent = new Intent(getApplicationContext(), EditCategories.class);
+        			intent.putExtra("theme", theme);
         			startActivity(intent);
         		}else{
         	        new PopulateContactListTask().execute((Object[]) null);
@@ -161,6 +181,7 @@ public class ContactList extends Activity {
     		DatabaseConnector database = new DatabaseConnector(this);
     		long id = database.insertContact("", "", "", "", "", "", 0);
     		intent.putExtra("ID", id);
+    		intent.putExtra("theme", theme);
     		startActivity(intent);
     		return true;
     	}else 
@@ -224,13 +245,53 @@ public class ContactList extends Activity {
     	} else
     		if(item.getItemId() == R.id.menu_register_cloud){
     			Intent intent = new Intent(getApplicationContext(), RegisterUser.class);
+    			intent.putExtra("theme", theme);
     			startActivity(intent);
-    		}
+    		}else 
+    			if(item.getItemId() == R.id.menu_change_them){
+    				AlertDialog.Builder input = new AlertDialog.Builder(this);
+    				input.setTitle("Change Theme");
+    				input.setItems(R.array.listOfThemes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+						      switch(which){
+						      case 0: //check if the view matches the current (maybe in database)
+						    	     	ContactList.this.changeTheme( R.style.HoloLightNoTitle);
+						    	  //finish();
+						    	   //Intent intent = new Intent(ContactList.this, ContactList.class);
+						    	  ///  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+						    	  ////  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						    	 //   startActivity(intent);
+						    	    break;
+						      case 1: 
+						    	         ContactList.this.changeTheme(R.style.DialogNoTitle);
+						    	         break;
+						    	      	
+						    	        
+						    	      	
+						      }
+							
+						}
+					});
+    				input.show();
+    				
+    			}
     	return super.onOptionsItemSelected(item);
     }
    
     
-    
+    public void changeTheme(int theme){
+    	//save in database
+    	
+        DatabaseConnector db = new DatabaseConnector(this);
+    	db.insertTheme(theme);
+    	finish();
+ 	   Intent intent = new Intent(ContactList.this, ContactList.class);
+ 	   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+ 	   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+ 	   startActivity(intent);
+    	
+       }
     /*
     public boolean login(String login, String pass)
     {
@@ -308,6 +369,7 @@ public class ContactList extends Activity {
 		        		System.out.println(id);
 		        		Intent intent = new Intent(getApplicationContext(), ContactView.class);
 		        		intent.putExtra("ID", contactIds.get((int)id));
+		        		intent.putExtra("theme", theme);
 		        		startActivity(intent);
 		        	}
 				});
