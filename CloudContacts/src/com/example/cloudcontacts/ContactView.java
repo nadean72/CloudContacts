@@ -25,6 +25,8 @@ public class ContactView extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        int theme = getIntent().getIntExtra("theme", 0);
+        setTheme(theme);
 		setContentView(R.layout.activity_contact_view);
 	}
 	

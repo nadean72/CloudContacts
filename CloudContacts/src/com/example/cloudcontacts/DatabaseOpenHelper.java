@@ -27,10 +27,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper{
 		String createUsers= "CREATE TABLE User "+
 				"(user TEXT PRIMARY KEY NOT NULL, "+
 				"pass TEXT NOT NULL);";
+		String createTheme ="CREATE TABLE Theme " +
+				"(themeId INTEGER PRIMARY KEY NOT NULL);";
 		
 		db.execSQL(createCategories);
 		db.execSQL(createContacts);
 		db.execSQL(createUsers);
+		db.execSQL(createTheme);
 	}
 	
 	@Override

@@ -26,8 +26,7 @@ public class HTTPPostTask extends AsyncTask<String, Integer, Boolean> {
 	@Override
 	protected Boolean doInBackground(String... urlAndData){
 		String url = urlAndData[0];
-		String key = urlAndData[1];
-		String filePath = urlAndData[2];
+		String filePath = urlAndData[1];
 		
 		
 		

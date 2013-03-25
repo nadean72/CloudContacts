@@ -6,12 +6,17 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.os.StrictMode;
+
 public class URLHelper {
 	
 	public static int bufferSize =1024;
 	
 	public boolean retrieveTextData(String urlString)
 	{
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 		BufferedReader input = null;
 		URL url = null;
 		

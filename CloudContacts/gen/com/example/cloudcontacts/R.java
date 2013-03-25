@@ -8,6 +8,9 @@
 package com.example.cloudcontacts;
 
 public final class R {
+    public static final class array {
+        public static final int listOfThemes=0x7f070000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -23,37 +26,38 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f090000;
-        public static final int action_settings=0x7f09001e;
-        public static final int cancelButton=0x7f090011;
-        public static final int categorySpinner=0x7f090002;
-        public static final int contactAddr=0x7f090007;
-        public static final int contactCat=0x7f090009;
-        public static final int contactComments=0x7f09000a;
-        public static final int contactEmail=0x7f090008;
-        public static final int contactList=0x7f090003;
-        public static final int contactName=0x7f090004;
-        public static final int editCat1=0x7f09000b;
-        public static final int editCat2=0x7f09000c;
-        public static final int editCat3=0x7f09000d;
-        public static final int editCat4=0x7f09000e;
-        public static final int editCat5=0x7f09000f;
-        public static final int loginName=0x7f090014;
-        public static final int menu_add_contact=0x7f090018;
-        public static final int menu_delete_contact=0x7f09001b;
-        public static final int menu_login_cloud=0x7f090019;
-        public static final int menu_register_cloud=0x7f09001a;
-        public static final int menu_save_contact=0x7f09001c;
-        public static final int menu_settings=0x7f09001d;
-        public static final int okButton=0x7f090010;
-        public static final int password=0x7f090017;
-        public static final int passwordOne=0x7f090015;
-        public static final int passwordTwo=0x7f090016;
-        public static final int primNumber=0x7f090005;
-        public static final int registerButton=0x7f090013;
-        public static final int registrationTitle=0x7f090012;
-        public static final int searchText=0x7f090001;
-        public static final int secNumber=0x7f090006;
+        public static final int LinearLayout1=0x7f0a0000;
+        public static final int action_settings=0x7f0a001f;
+        public static final int cancelButton=0x7f0a0011;
+        public static final int categorySpinner=0x7f0a0002;
+        public static final int contactAddr=0x7f0a0007;
+        public static final int contactCat=0x7f0a0009;
+        public static final int contactComments=0x7f0a000a;
+        public static final int contactEmail=0x7f0a0008;
+        public static final int contactList=0x7f0a0003;
+        public static final int contactName=0x7f0a0004;
+        public static final int editCat1=0x7f0a000b;
+        public static final int editCat2=0x7f0a000c;
+        public static final int editCat3=0x7f0a000d;
+        public static final int editCat4=0x7f0a000e;
+        public static final int editCat5=0x7f0a000f;
+        public static final int loginName=0x7f0a0014;
+        public static final int menu_add_contact=0x7f0a0018;
+        public static final int menu_change_them=0x7f0a001b;
+        public static final int menu_delete_contact=0x7f0a001c;
+        public static final int menu_login_cloud=0x7f0a0019;
+        public static final int menu_register_cloud=0x7f0a001a;
+        public static final int menu_save_contact=0x7f0a001d;
+        public static final int menu_settings=0x7f0a001e;
+        public static final int okButton=0x7f0a0010;
+        public static final int password=0x7f0a0017;
+        public static final int passwordOne=0x7f0a0015;
+        public static final int passwordTwo=0x7f0a0016;
+        public static final int primNumber=0x7f0a0005;
+        public static final int registerButton=0x7f0a0013;
+        public static final int registrationTitle=0x7f0a0012;
+        public static final int searchText=0x7f0a0001;
+        public static final int secNumber=0x7f0a0006;
     }
     public static final class integer {
         public static final int maxCommentHeight=0x7f050000;
@@ -66,15 +70,18 @@ public final class R {
         public static final int login_cloud=0x7f030004;
     }
     public static final class menu {
-        public static final int activity_contact_list=0x7f080000;
-        public static final int activity_contact_view=0x7f080001;
-        public static final int activity_edit_categories=0x7f080002;
-        public static final int activity_main=0x7f080003;
-        public static final int register_user=0x7f080004;
+        public static final int activity_contact_list=0x7f090000;
+        public static final int activity_contact_view=0x7f090001;
+        public static final int activity_edit_categories=0x7f090002;
+        public static final int activity_main=0x7f090003;
+        public static final int register_user=0x7f090004;
     }
     public static final class string {
         public static final int action_settings=0x7f06000d;
         public static final int app_name=0x7f060000;
+        public static final int changeTheme=0x7f060010;
+        public static final int first=0x7f060011;
+        public static final int fourth=0x7f060014;
         public static final int hello_world=0x7f060001;
         public static final int menu_add_contact=0x7f060006;
         public static final int menu_delete_contact=0x7f060007;
@@ -83,7 +90,9 @@ public final class R {
         public static final int menu_settings=0x7f060002;
         public static final int password=0x7f06000b;
         public static final int register=0x7f06000e;
+        public static final int second=0x7f060012;
         public static final int secondPassword=0x7f06000f;
+        public static final int third=0x7f060013;
         public static final int title_activity_contact_view=0x7f060003;
         public static final int title_activity_edit_categories=0x7f060004;
         public static final int title_activity_main=0x7f060005;
@@ -112,10 +121,21 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
+        /**  Use the Android Dialog theme as the base for a new compound theme DialogNoTitle 
+ Apply using attribute android:theme="@style/DialogNoTitle in manifest file for 
+  activity, or setTheme(R.style.DialogNoTitle) before setContentView() in code. 
+         */
+        public static final int DialogNoTitle=0x7f080002;
+        public static final int Goldenrod=0x7f080007;
+        public static final int HoloNoTitle=0x7f080004;
+        public static final int HoloRedNoTitle=0x7f080003;
+        public static final int MyRosePopupMenu=0x7f080008;
+        public static final int RoseStyle=0x7f080005;
+        public static final int Steel=0x7f080006;
     }
 }
