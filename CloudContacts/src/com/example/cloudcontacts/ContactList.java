@@ -97,9 +97,10 @@ public class ContactList extends Activity {
         });
         
 
+
         String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=test1";
         String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
-        //new DownloadDBTask().execute(url, file);
+        new DownloadDBTask().execute(url, file);
 
     }
     
@@ -125,12 +126,13 @@ public class ContactList extends Activity {
         
     }
     
-    protected void onStop(){
+    protected void onPause(){
+    	//stuff to write
+    	super.onPause();
     	//stuff to write
     	String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=test1";
     	String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
     	new HTTPPostTask().execute(url2, file);
-    	super.onStop();
     }
     
     protected void populateCategorySpinner(){
@@ -257,19 +259,26 @@ public class ContactList extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 						      switch(which){
+						      //default
 						      case 0: //check if the view matches the current (maybe in database)
-						    	     	ContactList.this.changeTheme( R.style.HoloLightNoTitle);
+						    	     	ContactList.this.changeTheme( R.style.AppBaseTheme);
 						    	  //finish();
 						    	   //Intent intent = new Intent(ContactList.this, ContactList.class);
 						    	  ///  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 						    	  ////  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						    	 //   startActivity(intent);
 						    	    break;
+						    	    
 						      case 1: 
-						    	         ContactList.this.changeTheme(R.style.DialogNoTitle);
+						    	         ContactList.this.changeTheme(R.style.Goldenrod);
 						    	         break;
-						    	      	
-						    	        
+						      case 2:
+						    	         ContactList.this.changeTheme(R.style.RoseStyle);
+						    	         break;
+						      case 3:
+					    	         ContactList.this.changeTheme(R.style.Steel);
+					    	         break;
+						      
 						    	      	
 						      }
 							
