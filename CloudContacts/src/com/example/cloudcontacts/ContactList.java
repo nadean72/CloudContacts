@@ -55,6 +55,14 @@ public class ContactList extends Activity {
         	databaseConnector.insertCategory(4, "Category5");
         	
         }
+        
+        Cursor login = databaseConnector.getUser();
+        if (login.getCount() != 0){
+        	int userIdx = login.getColumnIndex("user");
+            String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=" + login.getString(userIdx);
+            String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+            new DownloadDBTask().execute(url, file);
+        }
         categories.close();
         databaseConnector.close();
         
@@ -98,9 +106,6 @@ public class ContactList extends Activity {
         
 
 
-        String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=test1";
-        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
-        new DownloadDBTask().execute(url, file);
 
     }
     
@@ -130,9 +135,15 @@ public class ContactList extends Activity {
     	//stuff to write
     	super.onPause();
     	//stuff to write
-    	String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=test1";
-    	String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
-    	new HTTPPostTask().execute(url2, file);
+    	DatabaseConnector db = new DatabaseConnector(this);
+        Cursor login = db.getUser();
+        if (login.getCount() != 0){
+        	int userIdx = login.getColumnIndex("user");
+        	String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
+        	String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+        	new HTTPPostTask().execute(url2, file);
+        }
+    	
     }
     
     protected void populateCategorySpinner(){
@@ -183,10 +194,12 @@ public class ContactList extends Activity {
     	if (item.getItemId() == R.id.menu_add_contact){
     		Intent intent = new Intent(getApplicationContext(), ContactView.class);
     		DatabaseConnector database = new DatabaseConnector(this);
+    		database.open();
     		long id = database.insertContact("", "", "", "", "", "", 0);
     		intent.putExtra("ID", id);
     		intent.putExtra("theme", theme);
     		startActivity(intent);
+    		database.close();
     		return true;
     	}else 
     		if(item.getItemId() == R.id.menu_login_cloud){
@@ -208,13 +221,18 @@ public class ContactList extends Activity {
 			    	String dir = "http://softeng.cs.uwosh.edu/students/nadean72/login.php?user="+login+"&pass="+pass;
 					if(helper.retrieveTextData(dir))
 					{
+				        String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=" + login;
+				        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+				        new DownloadDBTask().execute(url, file);
+			        	new PopulateContactListTask().execute((Object[]) null);
 						DatabaseConnector db = new DatabaseConnector(ContactList.this);
-					    db.insertUser(login, pass);
+						db.open();
+						db.insertUser(login, pass);
 					    Toast.makeText(ContactList.this, "Login Successful", Toast.LENGTH_SHORT).show();
 						dialog.cancel();
 				        
 				        LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
-				        db.open();
+				       
 				        Cursor user = db.getUser();
 				        if(user.getCount() > 0){
 				        	while(layout.getChildCount() > 3)
@@ -295,7 +313,9 @@ public class ContactList extends Activity {
     	//save in database
     	
         DatabaseConnector db = new DatabaseConnector(this);
+        db.open();
     	db.insertTheme(theme);
+    	db.close();
     	finish();
  	   Intent intent = new Intent(ContactList.this, ContactList.class);
  	   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 

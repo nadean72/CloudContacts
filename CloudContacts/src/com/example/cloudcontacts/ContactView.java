@@ -134,6 +134,7 @@ public class ContactView extends Activity {
     	}else if (item.getItemId() == R.id.menu_save_contact){
     		
     		DatabaseConnector database = new DatabaseConnector(this);
+    		database.open();
             TextView name = (TextView) findViewById(R.id.contactName);
             TextView number = (TextView) findViewById(R.id.primNumber);
             TextView altNumber = (TextView) findViewById(R.id.secNumber);
@@ -151,11 +152,11 @@ public class ContactView extends Activity {
 	            		email.getText().toString(), 
 	            		comments.getText().toString(), 
 	            		category.getSelectedItemPosition());
-	            database.close();
 			    Toast.makeText(ContactView.this, "Contact Saved", Toast.LENGTH_SHORT).show();
 	        }else{
 			    Toast.makeText(ContactView.this, "Contact must be named", Toast.LENGTH_SHORT).show();
 	        }
+            database.close();
     		return true;
     	}else
     		return super.onOptionsItemSelected(item);

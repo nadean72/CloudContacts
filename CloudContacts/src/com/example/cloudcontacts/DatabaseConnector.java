@@ -38,9 +38,7 @@ public class DatabaseConnector {
 		newRow.put("comments", comments);
 		newRow.put("category", category);
 		
-		open();
 		long id = database.insert("Contacts", null, newRow);
-		close();
 		return id;
 	}
 	
@@ -50,9 +48,7 @@ public class DatabaseConnector {
 		newRow.put("_id", id);
 		newRow.put("name", name);
 		
-		open();
 		database.insert("Categories", null, newRow);
-		close();
 	}
 	
 	//insert Cloud User
@@ -64,10 +60,8 @@ public class DatabaseConnector {
 		users.put("pass", password);
 		
 		
-		open();
 		database.delete("User", null, null);
 		database.insert("User", null, users);
-		close();
 	}
 	
 	public void insertTheme(int theme)
@@ -77,10 +71,8 @@ public class DatabaseConnector {
 		themes.put("themeId", theme);
 	
 		
-		open();
 		database.delete("Theme", null, null);
 		database.insert("Theme", null, themes);
-		close();
 	}
 	
 	//
@@ -95,9 +87,7 @@ public class DatabaseConnector {
 	
 	//delete contact
 	public void deleteContact(int id){
-		open();
 		database.delete("Contacts", "_id=" + id, null);
-		close();
 	}
 	
 	//modify contact
@@ -111,9 +101,7 @@ public class DatabaseConnector {
 		editRow.put("comments", comments);
 		editRow.put("category", category);
 		
-		open();
 		database.update("Contacts", editRow, "_id=" + id, null);
-		close();
 	}
 	
 
@@ -122,9 +110,7 @@ public class DatabaseConnector {
 		ContentValues editRow = new ContentValues();
 		editRow.put("name", name);
 		
-		open();
 		database.update("Categories", editRow, "_id=" + id, null);
-		close();
 	}
 	
 	//list of contacts
