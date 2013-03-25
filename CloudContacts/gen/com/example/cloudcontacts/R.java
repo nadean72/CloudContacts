@@ -131,7 +131,11 @@ public final class R {
   activity, or setTheme(R.style.DialogNoTitle) before setContentView() in code. 
          */
         public static final int DialogNoTitle=0x7f080002;
-        public static final int HoloLightNoTitle=0x7f080003;
+        public static final int Goldenrod=0x7f080007;
         public static final int HoloNoTitle=0x7f080004;
+        public static final int HoloRedNoTitle=0x7f080003;
+        public static final int MyRosePopupMenu=0x7f080008;
+        public static final int RoseStyle=0x7f080005;
+        public static final int Steel=0x7f080006;
     }
 }

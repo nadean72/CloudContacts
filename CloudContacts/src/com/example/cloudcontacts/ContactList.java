@@ -255,19 +255,26 @@ public class ContactList extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 						      switch(which){
+						      //default
 						      case 0: //check if the view matches the current (maybe in database)
-						    	     	ContactList.this.changeTheme( R.style.HoloLightNoTitle);
+						    	     	ContactList.this.changeTheme( R.style.AppBaseTheme);
 						    	  //finish();
 						    	   //Intent intent = new Intent(ContactList.this, ContactList.class);
 						    	  ///  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 						    	  ////  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						    	 //   startActivity(intent);
 						    	    break;
+						    	    
 						      case 1: 
-						    	         ContactList.this.changeTheme(R.style.DialogNoTitle);
+						    	         ContactList.this.changeTheme(R.style.Goldenrod);
 						    	         break;
-						    	      	
-						    	        
+						      case 2:
+						    	         ContactList.this.changeTheme(R.style.RoseStyle);
+						    	         break;
+						      case 3:
+					    	         ContactList.this.changeTheme(R.style.Steel);
+					    	         break;
+						      
 						    	      	
 						      }
 							

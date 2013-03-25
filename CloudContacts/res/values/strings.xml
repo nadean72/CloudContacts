@@ -18,13 +18,13 @@
     <string name="register">Register for the Cloud</string>
     <string name="secondPassword">Re-Write Password</string>
     <string name="changeTheme">Themes</string>
-     <string name="first">Red</string>
-    <string name="second">Purple</string>
-    <string name="third">Third</string>
-    <string name="fourth">Fourth</string>
+     <string name="first">Default</string>
+    <string name="second">Goldenrod</string>
+    <string name="third">Rose</string>
+    <string name="fourth">Steel</string>
     
     <string-array name ="listOfThemes">
-        <item> @string/first</item>
+        <item>@string/first</item>
         <item>@string/second</item>
         <item>@string/third</item>
         <item>@string/fourth</item>
