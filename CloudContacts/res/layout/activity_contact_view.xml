@@ -63,4 +63,5 @@
         android:inputType="textMultiLine"
         android:maxLines="@integer/maxCommentHeight" />
 
+
 </LinearLayout>

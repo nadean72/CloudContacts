@@ -134,6 +134,8 @@ public final class R {
          */
         public static final int DialogNoTitle=0x7f080002;
         public static final int Goldenrod=0x7f080007;
+        /**   <item name="android:windowNoTitle">true</item> 
+         */
         public static final int HoloNoTitle=0x7f080004;
         public static final int HoloRedNoTitle=0x7f080003;
         public static final int MyRosePopupMenu=0x7f080008;

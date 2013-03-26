@@ -15,14 +15,14 @@
       
       
       <style name="HoloRedNoTitle" parent="@android:style/Theme.Holo.Light">
-         <item name="android:windowNoTitle">true</item>
+         <!-- <item name="android:windowNoTitle">true</item> -->
          <item name="android:textColor">#00FF00</item>
          <item name="android:background">#FF0000</item>
          <item name="android:attr/editTextColor">#00FF00</item>
       </style>
       
       <style name="HoloNoTitle" parent="@android:style/Theme.Holo">
-         <item name="android:windowNoTitle">true</item>
+        <!--  <item name="android:windowNoTitle">true</item> -->
       </style>
       
       <style name="RoseStyle" >

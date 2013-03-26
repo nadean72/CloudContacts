@@ -20,9 +20,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -67,7 +69,7 @@ public class ContactList extends Activity {
         categories.close();
         databaseConnector.close();
         
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
         DatabaseConnector db = new DatabaseConnector(this);
         db.open();
@@ -105,8 +107,6 @@ public class ContactList extends Activity {
         	}
         });
         
-
-
 
     }
     
@@ -224,10 +224,17 @@ public class ContactList extends Activity {
 			    	String dir = "http://softeng.cs.uwosh.edu/students/nadean72/login.php?user="+login+"&pass="+pass;
 					if(helper.retrieveTextData(dir))
 					{
+
+						DatabaseConnector tempDb = new DatabaseConnector(ContactList.this);
+						tempDb.open();
+						if(tempDb.getUser().getCount() > 0)
+							logout();
+						tempDb.close();
 				        String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=" + login;
 				        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
 				        new DownloadDBTask().execute(url, file);
 			        	new PopulateContactListTask().execute((Object[]) null);
+			        	populateCategorySpinner();
 						DatabaseConnector db = new DatabaseConnector(ContactList.this);
 						db.open();
 						db.insertUser(login, pass);
@@ -306,23 +313,35 @@ public class ContactList extends Activity {
     				input.show();
     				
     			}else if (item.getItemId() == R.id.menu_logout){
+    				logout();
+    				LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
+    				while(layout.getChildCount() > 3)
+    					layout.removeViewAt(0);
     				DatabaseConnector db = new DatabaseConnector(this);
     				db.open();
-    		        Cursor login = db.getUser();
-    		        login.moveToFirst();
-    		        int userIdx = login.getColumnIndex("user");
-    		        String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
-    		        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
-    		        new HTTPPostTask().execute(url2, file);
     				db.logoutUser();
     				db.close();
-    		        LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
-    	        	while(layout.getChildCount() > 3)
-    	        		layout.removeViewAt(0);
-    				
     			}
     	return super.onOptionsItemSelected(item);
     }
+
+	public void logout() {
+		DatabaseConnector db = new DatabaseConnector(this);
+		db.open();
+		Cursor login = db.getUser();
+		login.moveToFirst();
+		if(login.getCount() > 0){
+			int userIdx = login.getColumnIndex("user");
+			String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
+			String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+			new HTTPPostTask().execute(url2, file);
+			db.close();
+			
+		}else{
+			Toast.makeText(ContactList.this, "Not Logged In", Toast.LENGTH_SHORT).show();
+			   
+		}
+	}
    
     
     public void changeTheme(int theme){

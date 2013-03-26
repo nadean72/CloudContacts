@@ -11,8 +11,11 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +27,11 @@ public class ContactView extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         int theme = getIntent().getIntExtra("theme", 0);
         setTheme(theme);
 		setContentView(R.layout.activity_contact_view);
+		
 	}
 	
 	protected void onResume(){
@@ -161,6 +165,7 @@ public class ContactView extends Activity {
     	}else
     		return super.onOptionsItemSelected(item);
     }
+    
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
