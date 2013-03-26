@@ -58,6 +58,7 @@ public class ContactList extends Activity {
         
         Cursor login = databaseConnector.getUser();
         if (login.getCount() != 0){
+        	login.moveToFirst();
         	int userIdx = login.getColumnIndex("user");
             String url = "http://softeng.cs.uwosh.edu/students/nadean72/download.php?user=" + login.getString(userIdx);
             String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
@@ -136,13 +137,16 @@ public class ContactList extends Activity {
     	super.onPause();
     	//stuff to write
     	DatabaseConnector db = new DatabaseConnector(this);
+    	db.open();
         Cursor login = db.getUser();
         if (login.getCount() != 0){
+            login.moveToFirst();
         	int userIdx = login.getColumnIndex("user");
         	String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
         	String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
         	new HTTPPostTask().execute(url2, file);
         }
+        db.close();
     	
     }
     
@@ -196,13 +200,12 @@ public class ContactList extends Activity {
     		DatabaseConnector database = new DatabaseConnector(this);
     		database.open();
     		long id = database.insertContact("", "", "", "", "", "", 0);
+    		database.close();
     		intent.putExtra("ID", id);
     		intent.putExtra("theme", theme);
     		startActivity(intent);
-    		database.close();
     		return true;
-    	}else 
-    		if(item.getItemId() == R.id.menu_login_cloud){
+    	}else if(item.getItemId() == R.id.menu_login_cloud){
     		final AlertDialog.Builder  input = new AlertDialog.Builder(this);
     		LayoutInflater inflater = this.getLayoutInflater();
     		final View view = (inflater.inflate(R.layout.login_cloud,  null));
@@ -264,13 +267,11 @@ public class ContactList extends Activity {
     		
     		input.show();
     		return super.onOptionsItemSelected(item);
-    	} else
-    		if(item.getItemId() == R.id.menu_register_cloud){
+    	} else if(item.getItemId() == R.id.menu_register_cloud){
     			Intent intent = new Intent(getApplicationContext(), RegisterUser.class);
     			intent.putExtra("theme", theme);
     			startActivity(intent);
-    		}else 
-    			if(item.getItemId() == R.id.menu_change_them){
+    	}else if(item.getItemId() == R.id.menu_change_them){
     				AlertDialog.Builder input = new AlertDialog.Builder(this);
     				input.setTitle("Change Theme");
     				input.setItems(R.array.listOfThemes, new DialogInterface.OnClickListener() {
@@ -303,6 +304,21 @@ public class ContactList extends Activity {
 						}
 					});
     				input.show();
+    				
+    			}else if (item.getItemId() == R.id.menu_logout){
+    				DatabaseConnector db = new DatabaseConnector(this);
+    				db.open();
+    		        Cursor login = db.getUser();
+    		        login.moveToFirst();
+    		        int userIdx = login.getColumnIndex("user");
+    		        String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
+    		        String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+    		        new HTTPPostTask().execute(url2, file);
+    				db.logoutUser();
+    				db.close();
+    		        LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayout1);
+    	        	while(layout.getChildCount() > 3)
+    	        		layout.removeViewAt(0);
     				
     			}
     	return super.onOptionsItemSelected(item);

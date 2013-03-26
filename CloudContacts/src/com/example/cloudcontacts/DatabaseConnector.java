@@ -63,6 +63,13 @@ public class DatabaseConnector {
 		database.delete("User", null, null);
 		database.insert("User", null, users);
 	}
+
+	public void logoutUser(){
+
+		database.delete("User", null, null);
+		
+	}
+	
 	
 	public void insertTheme(int theme)
 	{

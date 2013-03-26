@@ -27,7 +27,7 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0a0000;
-        public static final int action_settings=0x7f0a001f;
+        public static final int action_settings=0x7f0a0020;
         public static final int cancelButton=0x7f0a0011;
         public static final int categorySpinner=0x7f0a0002;
         public static final int contactAddr=0x7f0a0007;
@@ -44,11 +44,12 @@ public final class R {
         public static final int loginName=0x7f0a0014;
         public static final int menu_add_contact=0x7f0a0018;
         public static final int menu_change_them=0x7f0a001b;
-        public static final int menu_delete_contact=0x7f0a001c;
+        public static final int menu_delete_contact=0x7f0a001d;
         public static final int menu_login_cloud=0x7f0a0019;
+        public static final int menu_logout=0x7f0a001c;
         public static final int menu_register_cloud=0x7f0a001a;
-        public static final int menu_save_contact=0x7f0a001d;
-        public static final int menu_settings=0x7f0a001e;
+        public static final int menu_save_contact=0x7f0a001e;
+        public static final int menu_settings=0x7f0a001f;
         public static final int okButton=0x7f0a0010;
         public static final int password=0x7f0a0017;
         public static final int passwordOne=0x7f0a0015;
@@ -83,6 +84,7 @@ public final class R {
         public static final int first=0x7f060011;
         public static final int fourth=0x7f060014;
         public static final int hello_world=0x7f060001;
+        public static final int logout=0x7f060015;
         public static final int menu_add_contact=0x7f060006;
         public static final int menu_delete_contact=0x7f060007;
         public static final int menu_login_cloud=0x7f060009;

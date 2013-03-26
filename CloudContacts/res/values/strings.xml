@@ -29,4 +29,5 @@
         <item>@string/third</item>
         <item>@string/fourth</item>
     </string-array>
+        <string name="logout">Log Out</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.cloudcontacts;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,15 @@ public class RegisterUser extends Activity {
 			// boolean success=true;
 			if(success){
 				DatabaseConnector db = new DatabaseConnector(this);
+				db.open();
 			    db.insertUser(username.getText().toString(), passwordOne.getText().toString());
+		        Cursor login = db.getUser();
+		        login.moveToFirst();
+		       	int userIdx = login.getColumnIndex("user");
+		       	String url2 = "http://softeng.cs.uwosh.edu/students/nadean72/upload.php?user=" + login.getString(userIdx);
+		       	String file = "/data/data/com.example.cloudcontacts/databases/MyContacts";
+		        db.close();
+		       	new HTTPPostTask().execute(url2, file);
 			    Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show();
 			    this.finish();
 			}
